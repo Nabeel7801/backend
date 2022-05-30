@@ -14,7 +14,8 @@ exports.up = function(knex) {
             table.increments('id');
             table.string('book_name', 255).notNullable();
             table.string('author', 255).notNullable();
-            table.string('borrowed_by', 255).notNullable();
+            table.bigInteger('borrowed_by').unsigned().index()
+            .references('id').inTable('students');
             table.string('date_of_borrow', 255).notNullable();
             table.string('date_of_return', 255).notNullable();
             table.timestamps(true, true);

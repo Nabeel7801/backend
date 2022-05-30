@@ -5,8 +5,9 @@ class BooksController {
     async getBooks(req, res) {
 
         try {
-            const data = await db.select()
-                .from('books')
+            const data = await db.select('*')
+            .from('books')
+            .join('students', {'students.id': 'books.borrowed_by'})
             res.status(201).json(data);
         }catch (err) {
             console.log(err);
